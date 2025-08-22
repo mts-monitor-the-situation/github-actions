@@ -1,0 +1,23 @@
+name: 'single-commit'
+description: 'Commit a single file automatically'
+author: Algo7
+inputs:
+  path:
+    description: 'The relative path from the repository root to the file without leading or trailing slashes and dots'
+    required: true
+
+  committer:
+    description: 'The name of the committer. The format of <bot_name>[bot]. You can view the details of your bot at https://api.github.com/users/<bot_name>[bot]'
+    required: true
+
+  committer_email:
+    description: 'The email of the committer. The format is <bot_id+bot_name>[bot]@users.noreply.github.com. You can view the details of your bot at https://api.github.com/users/<bot_name>[bot]'
+    required: true
+    
+  message:
+    description: 'The commit message'
+    required: true
+
+runs:
+  using: 'node24'
+  main: 'dist/index.js'

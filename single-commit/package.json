@@ -1,0 +1,26 @@
+{
+    "name": "single-commit",
+    "version": "1.0.0",
+    "description": "Automate commit of a single file",
+    "main": "app.js",
+    "type": "module",
+    "scripts": {
+        "build": "ncc build app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mts-monitor-the-situation/github-actions/single-commit"
+    },
+    "engines": {
+        "node": ">=22.17.1",
+        "pnpm": ">=10.5.0"
+    },
+    "packageManager": "pnpm@10.5.0",
+    "author": "Algo7",
+    "license": "AGPL-3.0-or-later",
+    "dependencies": {
+        "@actions/core": "^1.11.1",
+        "@actions/github": "^6.0.1",
+        "@octokit/action": "^8.0.2"
+    }
+}

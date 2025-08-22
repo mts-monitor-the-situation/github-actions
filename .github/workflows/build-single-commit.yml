@@ -1,0 +1,65 @@
+name: Build [single-commit]
+
+permissions:
+  contents: write
+  
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - single-commit/**/*.js
+      - single-commit/**/*.json
+      - .github/workflows/build-single-commit.yml
+      - '!single-commit/dist/index.js'
+      - '!single-commit/dist/package.json'
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: ./single-commit/package.json
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ./single-commit/package.json
+          cache: 'pnpm'
+          cache-dependency-path: ./single-commit/pnpm-lock.yaml
+
+      - name: Install Dependencies
+        run: |
+          cd single-commit
+          pnpm i -g @vercel/ncc
+          pnpm i -P --frozen-lockfile
+
+      - name: Build
+        run: |
+          cd single-commit
+          pnpm run build
+
+      - name: Get MTS Automation Bot Token
+        uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          app-id: ${{ secrets.MTS_AUTOMATION_BOT_CLIENT_ID }}
+          private-key: ${{ secrets.MTS_AUTOMATION_BOT_PRIVATE_KEY }}
+
+      - name: Update Build
+        uses: mts-monitor-the-situation/github-actions/single-commit@main
+        with:
+          path: single-commit/dist/index.js
+          committer: "mts-automation-bot[bot]"
+          committer_email: "228017805+mts-automation-bot[bot]@users.noreply.github.com"
+          message: 'New build [single-commit]'
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
