@@ -62932,10 +62932,10 @@ const GetFileSHA = async (octokit, path) => {
  * @param {{sha: string, hash: string}} upStreamFileInfo - The commit SHA and the MD5 hash of the file from GitHub
  * @param {string} commitMessage - The commit message
  * @param {string} committer - The name of the committer
- * @param {string} committer_email - The email of the committer
+ * @param {string} committerEmail - The email of the committer
  * @returns {Promise<Void | Error>} - A promise that resolves when the file is created or updated, or rejects with an error
  */
-const CreateOrUpdateFile = async (octokit, path, upStreamFileInfo, commitMessage, committer, committer_email) => {
+const CreateOrUpdateFile = async (octokit, path, upStreamFileInfo, commitMessage, committer, committerEmail) => {
 
     try {
         // Read the file content as base64
@@ -62954,7 +62954,7 @@ const CreateOrUpdateFile = async (octokit, path, upStreamFileInfo, commitMessage
             // The info is obtained from here: https://api.github.com/users/<bot_name>[bot]
             committer: {
                 name: committer,
-                email: committer_email
+                email: committerEmail
             },
             content: currentFileContent,
             headers: {
@@ -63013,7 +63013,7 @@ const main = async () => {
         const path = core.getInput('path', { required: true });
         const commitMessage = core.getInput('message', { required: true });
         const committer = core.getInput('committer', { required: true });
-        const committer_email = core.getInput('committer_email', { required: true });
+        const committerEmail = core.getInput('committer_email', { required: true });
 
         // Create Octokit instance
         const octokit = new dist_bundle_Octokit({})
@@ -63022,7 +63022,7 @@ const main = async () => {
         const fileInfo = await GetFileSHA(octokit, path);
 
         // Create or update the file
-        await CreateOrUpdateFile(octokit, path, fileInfo, commitMessage);
+        await CreateOrUpdateFile(octokit, path, fileInfo, commitMessage, committer, committerEmail);
     } catch (err) {
         core.info(`Main error: ${err.message}`);
         throw err
