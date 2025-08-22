@@ -13,7 +13,7 @@ const main = async () => {
         const path = core.getInput('path', { required: true });
         const commitMessage = core.getInput('message', { required: true });
         const committer = core.getInput('committer', { required: true });
-        const committer_email = core.getInput('committer_email', { required: true });
+        const committerEmail = core.getInput('committer_email', { required: true });
 
         // Create Octokit instance
         const octokit = new Octokit({})
@@ -22,7 +22,7 @@ const main = async () => {
         const fileInfo = await GetFileSHA(octokit, path);
 
         // Create or update the file
-        await CreateOrUpdateFile(octokit, path, fileInfo, commitMessage);
+        await CreateOrUpdateFile(octokit, path, fileInfo, commitMessage, committer, committerEmail);
     } catch (err) {
         core.info(`Main error: ${err.message}`);
         throw err

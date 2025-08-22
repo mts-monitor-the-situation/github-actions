@@ -62,10 +62,10 @@ const GetFileSHA = async (octokit, path) => {
  * @param {{sha: string, hash: string}} upStreamFileInfo - The commit SHA and the MD5 hash of the file from GitHub
  * @param {string} commitMessage - The commit message
  * @param {string} committer - The name of the committer
- * @param {string} committer_email - The email of the committer
+ * @param {string} committerEmail - The email of the committer
  * @returns {Promise<Void | Error>} - A promise that resolves when the file is created or updated, or rejects with an error
  */
-const CreateOrUpdateFile = async (octokit, path, upStreamFileInfo, commitMessage, committer, committer_email) => {
+const CreateOrUpdateFile = async (octokit, path, upStreamFileInfo, commitMessage, committer, committerEmail) => {
 
     try {
         // Read the file content as base64
@@ -84,7 +84,7 @@ const CreateOrUpdateFile = async (octokit, path, upStreamFileInfo, commitMessage
             // The info is obtained from here: https://api.github.com/users/<bot_name>[bot]
             committer: {
                 name: committer,
-                email: committer_email
+                email: committerEmail
             },
             content: currentFileContent,
             headers: {
