@@ -58,8 +58,8 @@ jobs:
         uses: mts-monitor-the-situation/github-actions/single-commit@main
         with:
           path: single-commit/dist/index.js
-          committer: 'mts-automation[bot]'
-          committer_email: '228017805+mts-automation[bot]@users.noreply.github.com'
+          committer: '{{ vars.MTS_AUTOMATION_BOT_COMMITTER_NAME }}'
+          committer_email: '{{ vars.MTS_AUTOMATION_BOT_COMMITTER_EMAIL }}'
           message: 'New build [single-commit]'
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
