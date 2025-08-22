@@ -45,7 +45,7 @@ jobs:
           cd single-commit
           pnpm run build
 
-      - name: Get MTS Automation Bot Token
+      - name: Get MTS Automation App Token
         uses: actions/create-github-app-token@v2
         id: app-token
         with:
@@ -58,8 +58,8 @@ jobs:
         uses: mts-monitor-the-situation/github-actions/single-commit@main
         with:
           path: single-commit/dist/index.js
-          committer: 'mts-automation-bot[bot]'
-          committer_email: '228017805+mts-automation-bot[bot]@users.noreply.github.com'
+          committer: 'mts-automation[bot]'
+          committer_email: '228017805+mts-automation[bot]@users.noreply.github.com'
           message: 'New build [single-commit]'
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
