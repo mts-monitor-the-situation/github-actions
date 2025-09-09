@@ -28,7 +28,7 @@ jobs:
           package_json_file: ./single-commit/package.json
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version-file: ./single-commit/package.json
           cache: 'pnpm'
