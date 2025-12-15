@@ -19,8 +19,8 @@
     "author": "Algo7",
     "license": "AGPL-3.0-or-later",
     "dependencies": {
-        "@actions/core": "^1.11.1",
+        "@actions/core": "^2.0.1",
         "@actions/github": "^6.0.1",
-        "@octokit/action": "^8.0.2"
+        "@octokit/action": "^8.0.4"
     }
 }
