@@ -46,7 +46,7 @@ jobs:
           pnpm run build
 
       - name: Get MTS Automation App Token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         id: app-token
         with:
           owner: ${{ github.repository_owner }}
